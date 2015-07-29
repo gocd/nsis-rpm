@@ -14,7 +14,7 @@ Effectively the source rpm contained the original nsis source, a few patches and
 The resultant rpms are checked into git for long term storage.
 
 ```bash
-$ sudo yum install -y rpm-build yum-utils epel-release
+$ sudo yum install -y rpm-build yum-utils epel-release repoview createrepo
 $ sudo yum groupinstall 'Development tools'
 $ sudo yum-builddep nsis-rpm/mingw-nsis.spec
 $ rpmbuild -bb mingw32-nsis.spec --define "_topdir $(pwd)" --define "_rpmdir $(pwd)" --define "_sourcedir $(pwd)"
