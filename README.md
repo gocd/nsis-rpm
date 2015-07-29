@@ -1,3 +1,7 @@
+# NSIS RPM packages to build go.cd windows installer
+
+[![Build Status](https://snap-ci.com/gocd/nsis-rpm/branch/master/build_image)](https://snap-ci.com/gocd/nsis-rpm/branch/master)
+
 # Usage
 
 Do this on a clean VM running on virtualbox.
@@ -12,6 +16,7 @@ The resultant rpms are checked into git for long term storage.
 ```bash
 $ sudo yum install -y rpm-build yum-utils epel-release
 $ sudo yum groupinstall 'Development tools'
+$ sudo yum-builddep nsis-rpm/mingw-nsis.spec
 $ rpmbuild -bb mingw32-nsis.spec --define "_topdir $(pwd)" --define "_rpmdir $(pwd)" --define "_sourcedir $(pwd)"
 ```
 
