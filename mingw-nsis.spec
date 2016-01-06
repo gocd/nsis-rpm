@@ -2,7 +2,7 @@
 %global _default_patch_fuzz 2
 
 Name:           mingw-nsis
-Version:        2.46
+Version:        2.50
 Release:        15%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
