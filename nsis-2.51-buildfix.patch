@@ -1,0 +1,12 @@
+Index: nsis-2.51-src/SCons/Config/gnu
+===================================================================
+--- nsis-2.51-src.orig/SCons/Config/gnu
++++ nsis-2.51-src/SCons/Config/gnu
+@@ -31,7 +31,7 @@ defenv['ALIGN_FLAG'] = '-Wl,--file-align
+ defenv['CPP_REQUIRES_STDLIB'] = 1
+ defenv['SUBSYS_CON'] = '-Wl,--subsystem,console'
+ defenv['MSVCRT_FLAG'] = ''
+-defenv['STDCALL'] = '__attribute__((__stdcall__))'
++defenv['STDCALL'] = '"__attribute__((__stdcall__))"'
+ 
+ ### defines

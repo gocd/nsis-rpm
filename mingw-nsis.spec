@@ -25,6 +25,7 @@ Patch3:         nsis-2.46-static-libstdc++.patch
 Patch4:         nsis-2.46-missing-unistd-include.patch
 # Add support to build against the mingw-w64 toolchain
 Patch5:         nsis-add-mingw-w64-support.patch
+Patch6:         nsis-2.51-buildfix.patch
 
 BuildRequires:  mingw32-filesystem
 BuildRequires:  mingw32-gcc
@@ -80,7 +81,7 @@ all plugins.
 %patch3 -p1 -b .static-libstdc++
 %patch4 -p1 -b .missing-unistd-include
 %patch5 -p0 -b .mingw-w64
-
+%patch6 -p1 -b .251-buildfix
 
 %build
 scons %{sconsopts}
