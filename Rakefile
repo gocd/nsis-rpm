@@ -59,7 +59,7 @@ task :build do
   cd PROJECT_ROOT do
     sh %Q{rpmbuild -bb mingw-nsis.spec --define "_topdir #{PROJECT_ROOT}" --define "_rpmdir #{PROJECT_ROOT}" --define "_sourcedir #{PROJECT_ROOT}"}
     mkdir_p File.join(BUILD_DIR, 'rpms')
-    cp "x86_64/mingw32-nsis-2.51-15.el6.x86_64.rpm", File.join(BUILD_DIR, 'rpms')
+    cp "x86_64/mingw32-nsis-3.04-2.el6.x86_64.rpm", File.join(BUILD_DIR, 'rpms')
   end
 
   cd BUILD_DIR do

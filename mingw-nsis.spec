@@ -1,9 +1,12 @@
-%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes
+%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes ZLIB_W32=%{mingw32_prefix}
 %global _default_patch_fuzz 2
 
+# do not build a debuginfo package. this avoids error on CentOS7:
+%define debug_package %{nil}
+
 Name:           mingw-nsis
-Version:        2.51
-Release:        15%{?dist}
+Version:        3.04
+Release:        2%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
@@ -12,27 +15,19 @@ URL:            http://nsis.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/nsis/nsis-%{version}-src.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-# This patch fixes NSIS to actually build 64-bit versions.
-# Originally from Debian, updated by Kevin Kofler.
-Patch0:         nsis-2.43-64bit-fixes.patch
 # Use RPM_OPT_FLAGS for the natively-built parts
-Patch1:         nsis-2.43-rpm-opt.patch
-# Make plugins not depend on libgcc_s_sjlj-1.dll (#553971)
-Patch2:         nsis-2.45-static-libgcc.patch
-# Make plugins not depend on libstdc++-6.dll (#734905)
-Patch3:         nsis-2.46-static-libstdc++.patch
-# Missing #include <unistd.h> to get close(2) function.
-Patch4:         nsis-2.46-missing-unistd-include.patch
-# Add support to build against the mingw-w64 toolchain
-Patch5:         nsis-add-mingw-w64-support.patch
-Patch6:         nsis-2.51-buildfix.patch
+# This patch removed by ketan
+# Patch:         0001-Use-RPM_OPT_FLAGS-for-the-natively-built-parts.patch
 
-BuildRequires:  mingw32-filesystem
+BuildRequires:  mingw32-filesystem >= 40
+BuildRequires:  gcc-c++
+BuildRequires:  zlib-devel
 BuildRequires:  mingw32-gcc
 BuildRequires:  mingw32-gcc-c++
 BuildRequires:  mingw32-binutils
 BuildRequires:  python
 BuildRequires:  scons
+BuildRequires:  mingw32-zlib
 
 # Don't build NSIS Menu as it doesn't actually work on POSIX systems: 1. it
 # doesn't find its index.html file without patching, 2. it has various links to
@@ -75,15 +70,8 @@ all plugins.
 %prep
 %setup -q -n nsis-%{version}-src
 
-%patch0 -p1 -b .64bit
-%patch1 -p1 -b .rpmopt
-%patch2 -p1 -b .static-libgcc
-%patch3 -p1 -b .static-libstdc++
-%patch4 -p1 -b .missing-unistd-include
-%patch5 -p0 -b .mingw-w64
-%patch6 -p1 -b .251-buildfix
-
 %build
+# Note: parallel build is broken
 scons %{sconsopts}
 
 
@@ -110,6 +98,47 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.04-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Mon Dec 17 2018 Sandro Mani <manisandro@gmail.com> - 3.04-1
+- Update to 3.04
+
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.03-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Thu Feb 08 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.03-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Wed Jan 31 2018 Sandro Mani <manisandro@gmail.com> - 3.03-1
+- Update to 3.03
+
+* Sat Oct 28 2017 Sandro Mani <manisandro@gmail.com> - 3.02.1-1
+- Update to 3.02.1
+
+* Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.01-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.01-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.01-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Fri Dec 23 2016 Christophe Fergeau <cfergeau@redhat.com> 3.01-1
+- New upstream version 3.01.
+
+* Thu Feb 18 2016 Richard W.M. Jones <rjones@redhat.com> - 2.50-1
+- New upstream version 2.50.
+- Fixes serious DLL hijacking attack:
+  https://sourceforge.net/p/nsis/bugs/1125/
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.46-17
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.46-16
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Fri May 29 2015 Richard W.M. Jones <rjones@redhat.com> - 2.46-15
 - Add NSIS_MAX_STRLEN=8192 to sconsopts (RHBZ#1090075).
 
