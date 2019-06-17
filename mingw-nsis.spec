@@ -1,4 +1,4 @@
-%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes ZLIB_W32=%{mingw32_prefix}
+%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes NSIS_CONFIG_LOG_TIMESTAMP=yes ZLIB_W32=%{mingw32_prefix}
 %global _default_patch_fuzz 2
 
 # do not build a debuginfo package. this avoids error on CentOS7:
