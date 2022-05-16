@@ -68,11 +68,13 @@ all plugins.
 # Remove executable bits
 find -type f -exec chmod -x {} \;
 
+# Modified by Chad as workaround on Centos Stream 8
 %build
-scons %{sconsopts}
+scons-3 %{sconsopts}
 
+# Modified by Chad as workaround on Centos Stream 8
 %install
-scons %{sconsopts} PREFIX_DEST=%{buildroot} install
+scons-3 %{sconsopts} PREFIX_DEST=%{buildroot} install
 mv %{buildroot}%{_docdir}/nsis %{buildroot}%{_docdir}/%{name}
 
 
