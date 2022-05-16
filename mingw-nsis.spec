@@ -1,32 +1,27 @@
-%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes NSIS_CONFIG_LOG_TIMESTAMP=yes ZLIB_W32=%{mingw32_prefix}
-%global _default_patch_fuzz 2
-
-# do not build a debuginfo package. this avoids error on CentOS7:
-%define debug_package %{nil}
+%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} ZLIB_W32=%{mingw32_prefix} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes
 
 Name:           mingw-nsis
-Version:        3.04
+Version:        3.08
 Release:        2%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        zlib and CPL
-Group:          Development/Libraries
 URL:            http://nsis.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/nsis/nsis-%{version}-src.tar.bz2
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # Use RPM_OPT_FLAGS for the natively-built parts
 # This patch removed by ketan
-# Patch:         0001-Use-RPM_OPT_FLAGS-for-the-natively-built-parts.patch
+# Patch1:         0001-Use-RPM_OPT_FLAGS-for-the-natively-built-parts.patch
+
+BuildRequires:  gcc-c++
+BuildRequires:  python3
+BuildRequires:  python3-scons
+BuildRequires:  zlib-devel
 
 BuildRequires:  mingw32-filesystem >= 40
-BuildRequires:  gcc-c++
-BuildRequires:  zlib-devel
 BuildRequires:  mingw32-gcc
 BuildRequires:  mingw32-gcc-c++
 BuildRequires:  mingw32-binutils
-BuildRequires:  python
-BuildRequires:  scons
 BuildRequires:  mingw32-zlib
 
 # Don't build NSIS Menu as it doesn't actually work on POSIX systems: 1. it
@@ -68,36 +63,63 @@ all plugins.
 
 
 %prep
-%setup -q -n nsis-%{version}-src
+%autosetup -p1 -n nsis-%{version}-src
+
+# Remove executable bits
+find -type f -exec chmod -x {} \;
 
 %build
-# Note: parallel build is broken
 scons %{sconsopts}
 
-
 %install
-rm -rf $RPM_BUILD_ROOT
-
-mkdir $RPM_BUILD_ROOT
-scons %{sconsopts} PREFIX_DEST=$RPM_BUILD_ROOT install
-
-mv $RPM_BUILD_ROOT%{_docdir}/nsis $RPM_BUILD_ROOT%{_docdir}/%{name}
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+scons %{sconsopts} PREFIX_DEST=%{buildroot} install
+mv %{buildroot}%{_docdir}/nsis %{buildroot}%{_docdir}/%{name}
 
 
 %files -n mingw32-nsis
-%defattr(-,root,root)
+%license COPYING
 %doc %{_docdir}/%{name}
-%config(noreplace) %{_sysconfdir}/nsisconf.nsh
+%{_sysconfdir}/nsisconf.nsh
 %{_bindir}/*
-#{_includedir}/nsis
-%{_datadir}/nsis
+%{_datadir}/nsis/
 
 
 %changelog
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.08-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
+* Mon Sep 27 2021 Sandro Mani <manisandro@gmail.com> - 3.08-1
+- Update to 3.08
+
+* Sun Jul 25 2021 Sandro Mani <manisandro@gmail.com> - 3.07-1
+- Update to 3.07
+
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.06.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.06.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Sat Aug 01 2020 Sandro Mani <manisandro@gmail.com> - 3.06-1
+- Update to 3.06
+
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.05-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Mon Mar 09 2020 Sandro Mani <manisandro@gmail.com> - 3.05-2
+- Add ability to log installs
+
+* Sat Mar 07 2020 Richard W.M. Jones <rjones@redhat.com> - 3.05-1
+- New upstream version 3.05.
+- Remove scons/Python 3 patch which is upstream.
+- Add patch to fix GCC 10 -fno-common bug.
+
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.04-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.04-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.04-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
