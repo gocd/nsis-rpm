@@ -1,7 +1,5 @@
 # NSIS RPM packages to build go.cd windows installer
 
-[![Build Status](https://snap-ci.com/gocd/nsis-rpm/branch/master/build_image)](https://snap-ci.com/gocd/nsis-rpm/branch/master)
-
 # Usage
 
 Do this on a clean VM running on virtualbox.
