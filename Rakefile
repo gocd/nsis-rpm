@@ -65,7 +65,6 @@ task :build do
   cd BUILD_DIR do
     sh("repomanage --keep 3 --old rpm | xargs rm -fv")
     sh("createrepo --database --update . || createrepo --database .")
-    sh("repoview --title 'Extra packages for Go CD Infrastructure' .")
   end
 end
 
