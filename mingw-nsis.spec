@@ -1,4 +1,4 @@
-%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} ZLIB_W32=%{mingw32_prefix} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes
+%global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} ZLIB_W32=%{mingw32_prefix} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes NSIS_CONFIG_LOG_TIMESTAMP=yes
 
 Name:           mingw-nsis
 Version:        3.08
