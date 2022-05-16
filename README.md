@@ -15,7 +15,7 @@ The resultant rpms are checked into git for long term storage.
 $ sudo yum install -y rpm-build yum-utils epel-release createrepo
 $ sudo yum groupinstall 'Development tools'
 $ sudo yum-builddep mingw-nsis.spec
-$ rpmbuild -bb mingw-nsis.spec --nodebuginfo --define "_topdir $(pwd)" --define "_rpmdir $(pwd)" --define "_sourcedir $(pwd)"
+$ rpmbuild -bb mingw-nsis.spec --define "_topdir $(pwd)" --define "_rpmdir $(pwd)" --define "_sourcedir $(pwd)"
 ```
 
 # On CI machines

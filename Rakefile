@@ -57,7 +57,7 @@ end
 desc "Compile all files into the build directory"
 task :build do
   cd PROJECT_ROOT do
-    sh %Q{rpmbuild -bb mingw-nsis.spec --nodebuginfo --define "_topdir #{PROJECT_ROOT}" --define "_rpmdir #{PROJECT_ROOT}" --define "_sourcedir #{PROJECT_ROOT}"}
+    sh %Q{rpmbuild -bb mingw-nsis.spec --define "_topdir #{PROJECT_ROOT}" --define "_rpmdir #{PROJECT_ROOT}" --define "_sourcedir #{PROJECT_ROOT}"}
     mkdir_p File.join(BUILD_DIR, 'rpms')
     cp "x86_64/mingw32-nsis-3.08-2.el8.x86_64.rpm", File.join(BUILD_DIR, 'rpms')
   end
