@@ -5,7 +5,7 @@
 Do this on a clean VM running on virtualbox.
 
 This spec file and the sources are extracted from a source rpm from here -
-https://koji.fedoraproject.org/koji/buildinfo?buildID=1889200
+https://koji.fedoraproject.org/koji/buildinfo?buildID=2121487
 
 Effectively the source rpm contained the original nsis source, a few patches and most importantly the spec file. The spec file was tweaked a bit.
 
