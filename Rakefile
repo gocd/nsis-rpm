@@ -4,6 +4,7 @@ def remote_name
   ENV.fetch("REMOTE_NAME", "origin")
 end
 
+NSIS_VERSION = "3.08-4.el9"
 PROJECT_ROOT = `git rev-parse --show-toplevel`.strip
 BUILD_DIR    = File.join(PROJECT_ROOT, "build")
 GH_PAGES_REF = File.join(BUILD_DIR, ".git/refs/remotes/#{remote_name}/gh-pages")
@@ -59,8 +60,9 @@ task :build do
   cd PROJECT_ROOT do
     sh %Q{rpmbuild -bb mingw-nsis.spec --define "_topdir #{PROJECT_ROOT}" --define "_rpmdir #{PROJECT_ROOT}" --define "_sourcedir #{PROJECT_ROOT}"}
     mkdir_p File.join(BUILD_DIR, 'rpms')
-    cp "noarch/*.rpm", File.join(BUILD_DIR, 'rpms')
-    cp "x86_64/*.rpm", File.join(BUILD_DIR, 'rpms')
+    cp "noarch/mingw32-nsis-#{NSIS_VERSION}.noarch.rpm", File.join(BUILD_DIR, 'rpms')
+    cp "noarch/mingw64-nsis-#{NSIS_VERSION}.noarch.rpm", File.join(BUILD_DIR, 'rpms')
+    cp "x86_64/mingw-nsis-base-#{NSIS_VERSION}.x86_64.rpm", File.join(BUILD_DIR, 'rpms')
   end
 
   cd BUILD_DIR do
