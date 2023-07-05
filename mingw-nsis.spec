@@ -6,8 +6,8 @@
 %define debug_package %{nil}
 
 Name:           mingw-nsis
-Version:        3.08
-Release:        4%{?dist}
+Version:        3.09
+Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
 License:        Zlib AND CPL-1.0
@@ -154,6 +154,9 @@ mv %{buildroot}%{_docdir}/nsis %{buildroot}%{_docdir}/%{name}
 
 
 %changelog
+* Tue Jul 04 2023 Sandro Mani <manisandro@gmail.com> - 3.09-1
+- Update to 3.09
+
 * Thu Jan 19 2023 Fedora Release Engineering <releng@fedoraproject.org> - 3.08-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
 
