@@ -154,7 +154,7 @@ mv %{buildroot}%{_docdir}/nsis %{buildroot}%{_docdir}/%{name}
 
 
 %changelog
-* Sun Mar 16 2025 Chad Wilson <chadw@thoughtworks.com@gmail.com> - 3.11-1
+* Sun Mar 16 2025 Chad Wilson <chadw@thoughtworks.com> - 3.11-1
 - Update to 3.11 (done in advance of Fedora's own release)
 
 * Tue Apr 02 2024 Sandro Mani <manisandro@gmail.com> - 3.10-1
