@@ -58,7 +58,7 @@ end
 desc "Compile all files into the build directory"
 task :build do
   cd PROJECT_ROOT do
-    sh %Q{rpmbuild -bb mingw-nsis.spec --define "_topdir #{PROJECT_ROOT}" --define "_rpmdir #{PROJECT_ROOT}" --define "_sourcedir #{PROJECT_ROOT}"}
+    sh %Q{rpmbuild -bb --target aarch64 --nodeps mingw-nsis.spec --define "_topdir #{PROJECT_ROOT}" --define "_rpmdir #{PROJECT_ROOT}" --define "_sourcedir #{PROJECT_ROOT}"}
     mkdir_p File.join(BUILD_DIR, 'rpms')
     cp "noarch/mingw32-nsis-#{NSIS_VERSION}.noarch.rpm", File.join(BUILD_DIR, 'rpms')
     cp "noarch/mingw64-nsis-#{NSIS_VERSION}.noarch.rpm", File.join(BUILD_DIR, 'rpms')
