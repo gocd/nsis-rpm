@@ -62,7 +62,7 @@ task :build do
     mkdir_p File.join(BUILD_DIR, 'rpms')
     cp "noarch/mingw32-nsis-#{NSIS_VERSION}.noarch.rpm", File.join(BUILD_DIR, 'rpms')
     cp "noarch/mingw64-nsis-#{NSIS_VERSION}.noarch.rpm", File.join(BUILD_DIR, 'rpms')
-    cp "x86_64/mingw-nsis-base-#{NSIS_VERSION}.x86_64.rpm", File.join(BUILD_DIR, 'rpms')
+    cp "x86_64/mingw-nsis-base-#{NSIS_VERSION}.aarch64.rpm", File.join(BUILD_DIR, 'rpms')
   end
 
   cd BUILD_DIR do
