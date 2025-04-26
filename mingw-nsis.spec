@@ -1,6 +1,6 @@
 # CUSTOM for GoCD: NSIS_CONFIG_LOG_TIMESTAMP=yes added
 %global sconsopts VERSION=%{version} PREFIX=%{_prefix} PREFIX_CONF=%{_sysconfdir} ZLIB_W32=%{mingw32_prefix} SKIPUTILS='NSIS Menu' STRIP_CP=false NSIS_MAX_STRLEN=8192 NSIS_CONFIG_LOG=yes NSIS_CONFIG_LOG_TIMESTAMP=yes
-%global sconsopts64 %{sconsopts} TARGET_ARCH=arm64
+%global sconsopts64 %{sconsopts} TARGET_ARCH=amd64
 
 # CUSTOM for GoCD: do not build a debuginfo package. this avoids error on CentOS:
 %define debug_package %{nil}
@@ -143,14 +143,14 @@ mv %{buildroot}%{_docdir}/nsis %{buildroot}%{_docdir}/%{name}
 %{_datadir}/nsis/Stubs/zlib-x86-unicode
 
 %files -n mingw64-nsis
-%{_datadir}/nsis/Bin/RegTool-arm64.bin
-%{_datadir}/nsis/Plugins/arm64-unicode/
-%{_datadir}/nsis/Stubs/bzip2-arm64-unicode
-%{_datadir}/nsis/Stubs/bzip2_solid-arm64-unicode
-%{_datadir}/nsis/Stubs/lzma-arm64-unicode
-%{_datadir}/nsis/Stubs/lzma_solid-arm64-unicode
-%{_datadir}/nsis/Stubs/zlib-arm64-unicode
-%{_datadir}/nsis/Stubs/zlib_solid-arm64-unicode
+%{_datadir}/nsis/Bin/RegTool-amd64.bin
+%{_datadir}/nsis/Plugins/amd64-unicode/
+%{_datadir}/nsis/Stubs/bzip2-amd64-unicode
+%{_datadir}/nsis/Stubs/bzip2_solid-amd64-unicode
+%{_datadir}/nsis/Stubs/lzma-amd64-unicode
+%{_datadir}/nsis/Stubs/lzma_solid-amd64-unicode
+%{_datadir}/nsis/Stubs/zlib-amd64-unicode
+%{_datadir}/nsis/Stubs/zlib_solid-amd64-unicode
 
 
 %changelog
