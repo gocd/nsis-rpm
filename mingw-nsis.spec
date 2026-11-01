@@ -6,7 +6,7 @@
 %define debug_package %{nil}
 
 Name:           mingw-nsis
-Version:        3.11
+Version:        3.13
 Release:        1%{?dist}
 Summary:        Nullsoft Scriptable Install System
 
@@ -14,8 +14,8 @@ License:        Zlib AND CPL-1.0
 URL:            http://nsis.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/nsis/nsis-%{version}-src.tar.bz2
 
-# Use RPM_OPT_FLAGS for the natively-built parts
 # CUSTOM for GoCD: patch removed/commented
+# Use RPM_OPT_FLAGS for the natively-built parts
 # Patch1:         0001-Use-RPM_OPT_FLAGS-for-the-natively-built-parts.patch
 
 BuildRequires:  gcc-c++
@@ -154,8 +154,29 @@ mv %{buildroot}%{_docdir}/nsis %{buildroot}%{_docdir}/%{name}
 
 
 %changelog
-* Sun Mar 16 2025 Chad Wilson <chadw@thoughtworks.com> - 3.11-1
-- Update to 3.11 (done in advance of Fedora's own release)
+* Sat Oct 17 2026 Sandro Mani <manisandro@gmail.com> - 3.13-1
+- Update to 3.13
+
+* Thu Jul 16 2026 Fedora Release Engineering <releng@fedoraproject.org> - 3.12-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_45_Mass_Rebuild
+
+* Tue May 05 2026 Sandro Mani <manisandro@gmail.com> - 3.12-1
+- Update to 3.12
+
+* Fri Jan 16 2026 Fedora Release Engineering <releng@fedoraproject.org> - 3.11-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
+
+* Thu Jul 24 2025 Fedora Release Engineering <releng@fedoraproject.org> - 3.11-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
+
+* Sun Mar 23 2025 Sandro Mani <manisandro@gmail.com> - 3.11-1
+- Update to 3.11
+
+* Fri Jan 17 2025 Fedora Release Engineering <releng@fedoraproject.org> - 3.10-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
+* Thu Jul 18 2024 Fedora Release Engineering <releng@fedoraproject.org> - 3.10-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
 * Tue Apr 02 2024 Sandro Mani <manisandro@gmail.com> - 3.10-1
 - Update to 3.10
